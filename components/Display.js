@@ -22,13 +22,13 @@ const styles = {
     paddingTop: 100,
     paddingBottom: 15,
     borderBottomWidth: 2,
-    borderBottomColor: '#454a50',
+    borderBottomColor: '#e0e0e0',
   },
   inputStyle: {
     fontSize: 24,
     fontWeight: '900',
     textAlign: 'right',
-    color: '#e0e0e0'
+    color: '#90a4ae'
   },
   resultStyle: {
     fontSize: 80,

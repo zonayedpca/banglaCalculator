@@ -19,14 +19,38 @@ class Keypad extends Component {
 
   renderBtn = () => {
     const { button } = styles;
-    return BTN.map(oneBtn => (
-      <Button
-        key={oneBtn}
-        onPress={() => this.handlePress(oneBtn)}
-        value={oneBtn}
-        style={button}
-      />
-    ))
+    return BTN.map(oneBtn => {
+      if((/[C%]/).exec(oneBtn)) {
+        return (
+          <Button
+            key={oneBtn}
+            onPress={() => this.handlePress(oneBtn)}
+            value={oneBtn}
+            style={button}
+            topStyle={{ color: '#454a50' }}
+          />
+        )
+      }
+      if((/[\/\x\-\+\=]/).exec(oneBtn)) {
+        return (
+          <Button
+            key={oneBtn}
+            onPress={() => this.handlePress(oneBtn)}
+            value={oneBtn}
+            style={button}
+            topStyle={{ color: '#ff5a60' }}
+          />
+        )
+      }
+      return (
+        <Button
+          key={oneBtn}
+          onPress={() => this.handlePress(oneBtn)}
+          value={oneBtn}
+          style={button}
+        />
+      )
+    })
   }
 
   render() {
