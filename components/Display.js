@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import { Font } from 'expo';
 
-import { coloredOperator } from '../utils';
+import { coloredOperator, convertToBangla } from '../utils';
 
 class Display extends Component {
   render() {
@@ -10,8 +11,8 @@ class Display extends Component {
     const { input, result } = this.props;
     return (
       <View style={container}>
-        <Text style={inputStyle}>{input ? input : 0}</Text>
-        <Text style={resultStyle}>{result ? result : 0}</Text>
+        <Text style={inputStyle}>{input ? convertToBangla(input) : convertToBangla(0)}</Text>
+        <Text style={resultStyle}>{result ? convertToBangla(result) : convertToBangla(0)}</Text>
       </View>
     )
   }
@@ -33,7 +34,7 @@ const styles = {
   resultStyle: {
     fontSize: 80,
     textAlign: 'right',
-    color: '#454a50'
+    color: '#37474f'
   }
 }
 

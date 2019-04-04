@@ -1,11 +1,13 @@
 import React from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 
-const Button = ({ onPress, style, value, topStyle }) => {
+import { convertToBangla } from '../../utils';
+
+const Button = ({ onPress, style, value, extraStyle, extraTextStyle }) => {
   const { button, btnText } = styles;
   return (
-    <TouchableOpacity onPress={onPress} style={[button, style]}>
-      <Text style={[btnText, topStyle]}>{value}</Text>
+    <TouchableOpacity onPress={onPress} style={[button, style, extraStyle]}>
+      <Text style={[btnText, extraTextStyle]}>{convertToBangla(value)}</Text>
     </TouchableOpacity>
   )
 }
