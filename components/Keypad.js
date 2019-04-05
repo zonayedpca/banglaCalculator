@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Button } from './common';
 
 import { onKeyPress } from '../actions';
+import { convertToBangla } from '../utils';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const KEYPAD_WIDTH = SCREEN_WIDTH - (25 * 2);
@@ -18,21 +19,23 @@ class Keypad extends Component {
   }
 
   renderBtn = () => {
-    const { button } = styles;
+    const { button, btnText } = styles;
+    const { color } = this.props;
     return BTN.map(oneBtn => {
-      const extraStyle = oneBtn === '=' && {
-        backgroundColor: '#ff5a60',
+      const styleExtra = oneBtn === '=' && {
+        backgroundColor: color.accentColor,
         elevation: 8
       };
-      const extraTextStyle = oneBtn === '=' ? { color: '#fff' } : ((/[C>\%]/g).exec(oneBtn) ? { color: '#37474f' } : (/[\/\x\-\+\=]/g).exec(oneBtn) && { color: '#ff5a60' });
+      const btnTextExtra = oneBtn === '=' ? { color: color.accentTextColor } : ((/[C>\%]/g).exec(oneBtn) ? { color: color.regularColor } : ((/[\/\x\-\+\=]/g).exec(oneBtn) ? { color: color.accentColor } : { color: color.primaryColor } ));
       return (
         <Button
           key={oneBtn}
           onPress={() => this.handlePress(oneBtn)}
-          value={oneBtn}
+          value={convertToBangla(oneBtn)}
           style={button}
-          extraStyle={extraStyle}
-          extraTextStyle={extraTextStyle}
+          styleExtra={styleExtra}
+          btnText={btnText}
+          btnTextExtra={btnTextExtra}
         />
       )
     })
@@ -58,8 +61,14 @@ const styles = {
     paddingBottom: 25
   },
   button: {
-    width: KEYPAD_WIDTH / 4
+    width: KEYPAD_WIDTH / 4,
+    justifyContent: 'center'
+  },
+  btnText: {
+    fontWeight: '900',
+    fontSize: 22,
+    textAlign: 'center'
   }
 }
 
-export default connect(({ input }) => ({ input }), { onKeyPress })(Keypad);
+export default connect(({ input, color }) => ({ input, color }), { onKeyPress })(Keypad);
